@@ -7,6 +7,9 @@ import CategoriesSection from './components/CategoriesSection';
 import GiftsSection from './components/GiftsSection';
 import CollaborationSection from './components/CollaborationSection';
 import FoundersThought from './components/FoundersThought';
+import TestimonialsSection from './components/TestimonialsSection';
+import CommunitySection from './components/CommunitySection';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -19,6 +22,13 @@ function App() {
       <GiftsSection />
       <CollaborationSection />
       <FoundersThought />
+      <TestimonialsSection />
+      <CommunitySection />
+      <Footer />
+      {/* Optional: Add a scroll-to-top button */}
+      
+    
+   
       
 
 

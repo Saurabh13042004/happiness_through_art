@@ -18,7 +18,7 @@ export function Navigation() {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden absolute top-6 left-4 z-50"
+        className="md:hidden fixed top-20 left-4 z-50"
         aria-label="Toggle menu"
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -30,12 +30,13 @@ export function Navigation() {
         md:hidden
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="pt-20 px-4">
+        <div className="pt-24 px-4">
           {navItems.map((item) => (
             <a
               key={item}
               href="#"
               className="block text-gray-800 hover:text-gray-600 font-medium py-3 border-b border-gray-100"
+              onClick={() => setIsOpen(false)}
             >
               {item}
             </a>
