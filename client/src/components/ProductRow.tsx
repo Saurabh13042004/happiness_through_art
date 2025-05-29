@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface Product {
   id: string;
@@ -57,40 +58,42 @@ const products: Product[] = [
 
 // Updated Product card component to match the image
 const ProductCard = ({ product }: { product: Product }) => (
-  <div className="flex flex-col h-full">
-    <div className="relative aspect-square mb-6 bg-gray-100">
-      <img
-        src={product.image}
-        alt={product.name}
-        className="w-full h-full object-cover"
-      />
-    </div>
-    <div className="flex flex-col flex-grow text-center">
-      <h3 className="text-lg font-medium">{product.name}</h3>
-      <p className="text-gray-600 mb-3">{product.type}</p>
-      <div className="flex items-center gap-3 mb-3 align-center justify-center">
-        <span className="font-medium">Rs. {product.price}</span>
-        <span className="bg-yellow-300 px-2 py-1 text-sm line-through">Rs. {product.originalPrice}</span>
+  <Link to={`/product/${product.id}`} className="block h-full">
+    <div className="flex flex-col h-full">
+      <div className="relative aspect-square mb-6 bg-gray-100">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover"
+        />
       </div>
-      {product.colors.length > 0 && (
-        <div className="flex gap-2 mb-3 align-center justify-center">
-          {product.colors.map((color, index) => (
-            <button
-              key={index}
-              className="w-6 h-6 rounded-full border border-gray-300"
-              style={{ backgroundColor: color }}
-              aria-label={`Color variant ${index + 1}`}
-            />
-          ))}
+      <div className="flex flex-col flex-grow text-center">
+        <h3 className="text-lg font-medium">{product.name}</h3>
+        <p className="text-gray-600 mb-3">{product.type}</p>
+        <div className="flex items-center gap-3 mb-3 align-center justify-center">
+          <span className="font-medium">Rs. {product.price}</span>
+          <span className="bg-yellow-300 px-2 py-1 text-sm line-through">Rs. {product.originalPrice}</span>
         </div>
-      )}
-      {product.onSale && (
-        <div className="mt-auto">
-          <span className="text-red-600 font-medium">SALE</span>
-        </div>
-      )}
+        {product.colors.length > 0 && (
+          <div className="flex gap-2 mb-3 align-center justify-center">
+            {product.colors.map((color, index) => (
+              <button
+                key={index}
+                className="w-6 h-6 rounded-full border border-gray-300"
+                style={{ backgroundColor: color }}
+                aria-label={`Color variant ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
+        {product.onSale && (
+          <div className="mt-auto">
+            <span className="text-red-600 font-medium">SALE</span>
+          </div>
+        )}
+      </div>
     </div>
-  </div>
+  </Link>
 );
 
 export function ProductRow() {
@@ -112,7 +115,7 @@ export function ProductRow() {
           </div>
         ))}
       </div>
-      
+
       <div className="md:hidden mt-8 flex justify-center">
         <button className="inline-flex items-center border border-black px-4 py-2 bg-white hover:bg-gray-100 transition-colors uppercase text-sm font-bold">
           Make them yours

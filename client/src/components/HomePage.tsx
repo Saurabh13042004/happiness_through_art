@@ -15,8 +15,7 @@ import ProductRow from './ProductRow';
 const HomePage = () => {
   return (
     <div className="min-h-screen bg-white">
-      <SaleBanner />
-      <Header />
+
       <HeroCarousel />
       <ProductGallery />
       <ProductRow/>
@@ -26,7 +25,7 @@ const HomePage = () => {
       <FoundersThought />
       <TestimonialsSection />
       <CommunitySection />
-      <Footer />
+
     </div>
   );
 };

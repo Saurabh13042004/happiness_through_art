@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom';
 const RegisterPage = () => {
   return (
     <div className="min-h-screen bg-white">
-      <SaleBanner />
-      <Header />
+
       
       <div className="max-w-3xl mx-auto px-4 py-16">
         <h1 className="text-5xl font-serif mb-10">Register</h1>
@@ -62,8 +61,7 @@ const RegisterPage = () => {
           </div>
         </form>
       </div>
-      
-      <Footer />
+
     </div>
   );
 };

@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom';
 const LoginPage = () => {
   return (
     <div className="min-h-screen bg-white">
-      <SaleBanner />
-      <Header />
       
       <div className="max-w-3xl mx-auto px-4 py-16">
         <h1 className="text-5xl font-serif mb-10">Login</h1>
@@ -51,7 +49,6 @@ const LoginPage = () => {
         </form>
       </div>
       
-      <Footer />
     </div>
   );
 };
