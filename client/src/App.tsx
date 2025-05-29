@@ -10,6 +10,7 @@ import FoundersThought from './components/FoundersThought';
 import TestimonialsSection from './components/TestimonialsSection';
 import CommunitySection from './components/CommunitySection';
 import Footer from './components/Footer';
+import ProductRow from './components/ProductRow';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Header />
       <HeroCarousel />
       <ProductGallery />
+      <ProductRow/>
       <CategoriesSection />
       <GiftsSection />
       <CollaborationSection />

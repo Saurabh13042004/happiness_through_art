@@ -12,7 +12,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Heart className="text-red-500 w-8 h-8 fill-current" />
-              <h2 className="text-2xl font-bold">Odd Giraffe</h2>
+              <h2 className="text-2xl font-bold">Happiness Throught Art</h2>
             </div>
             <p className="text-gray-600 mb-2">Feel Your Best</p>
           </div>
@@ -79,7 +79,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-200">
           <p className="text-gray-600 mb-4 md:mb-0">
-            © {currentYear} Odd Giraffe. All rights reserved.
+            © {currentYear} Happiness Throught Art. All rights reserved.
           </p>
           <div className="flex gap-4">
             <a href="#" className="text-gray-600 hover:text-black">

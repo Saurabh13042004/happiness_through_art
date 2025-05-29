@@ -4,13 +4,12 @@ import { Menu, X } from 'lucide-react';
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const navItems = [
-    "Mother's Day Favorites",
-    "New",
-    "Stationery & Desk",
-    "Home & Living",
+    "New In",
+    "Stationery",
+    "Art & Decor",
     "Lifestyle",
     "Gifts",
-    "Themes",
+    "Combo",
     "Clearance Sale"
   ];
 

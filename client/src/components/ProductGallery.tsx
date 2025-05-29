@@ -10,6 +10,7 @@ interface Product {
   image: string;
   colors: string[];
   onSale?: boolean;
+  featured?: boolean;
 }
 
 const products: Product[] = [
@@ -21,7 +22,8 @@ const products: Product[] = [
     originalPrice: 1699,
     image: 'https://images.unsplash.com/photo-1506102383123-c8ef1e872756?auto=format&fit=crop&q=80',
     colors: ['#F5F5F5'],
-    onSale: true
+    onSale: true,
+    featured: true
   },
   {
     id: '2',
@@ -62,20 +64,49 @@ const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1472898965229-f9b06b9c9bbe?auto=format&fit=crop&q=80',
     colors: ['#FFFFFF', '#1F2937', '#047857', '#E5E7EB', '#F5F5DC'],
     onSale: true
-  },
-  {
-    id: '6',
-    name: 'Timeless',
-    type: 'Medium Photobook',
-    price: 1499,
-    originalPrice: 1699,
-    image: 'https://images.unsplash.com/photo-1516575334481-f85287c2c82d?auto=format&fit=crop&q=80',
-    colors: ['#FFFFFF', '#1F2937', '#047857', '#E5E7EB', '#FFC0CB', '#F5F5DC'],
-    onSale: true
   }
 ];
 
+// Product card component to keep layout consistent
+const ProductCard = ({ product }: { product: Product }) => (
+  <div className="flex flex-col h-full">
+    <div className={`relative ${product.featured ? 'aspect-[3/4]' : 'aspect-square'} mb-4 bg-gray-100`}>
+      <img
+        src={product.image}
+        alt={product.name}
+        className="w-full h-full object-cover"
+      />
+    </div>
+    <div className="flex flex-col flex-grow">
+      <h3 className="text-lg font-medium">{product.name}</h3>
+      <p className="text-gray-600 mb-2">{product.type}</p>
+      <div className="flex items-center gap-2 mb-3">
+        <span className="font-medium">Rs. {product.price}</span>
+        <span className="text-gray-500 line-through">Rs. {product.originalPrice}</span>
+      </div>
+      <div className="flex gap-2 mb-2">
+        {product.colors.map((color, index) => (
+          <button
+            key={index}
+            className="w-6 h-6 rounded-full border border-gray-300"
+            style={{ backgroundColor: color }}
+            aria-label={`Color variant ${index + 1}`}
+          />
+        ))}
+      </div>
+      {product.onSale && (
+        <div className="mt-auto">
+          <span className="text-gray-700">SALE</span>
+        </div>
+      )}
+    </div>
+  </div>
+);
+
 export function ProductGallery() {
+  const featuredProduct = products.find(p => p.featured);
+  const regularProducts = products.filter(p => !p.featured).slice(0, 4);
+
   return (
     <section className="container mx-auto px-4 py-12">
       <div className="flex justify-between items-center mb-8">
@@ -91,39 +122,24 @@ export function ProductGallery() {
         </a>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {products.map((product) => (
-          <div key={product.id} className="flex flex-col">
-            <div className="relative aspect-square mb-4 bg-gray-100">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="flex flex-col flex-grow">
-              <h3 className="text-lg font-medium">{product.name}</h3>
-              <p className="text-gray-600 mb-2">{product.type}</p>
-              <div className="flex items-center gap-2 mb-3">
-                <span className="font-medium">Rs. {product.price}</span>
-                <span className="text-gray-500 line-through">Rs. {product.originalPrice}</span>
-                {product.onSale && (
-                  <span className="text-red-600 text-sm">SALE</span>
-                )}
-              </div>
-              <div className="flex gap-2 mt-auto">
-                {product.colors.map((color, index) => (
-                  <button
-                    key={index}
-                    className="w-6 h-6 rounded-full border border-gray-300"
-                    style={{ backgroundColor: color }}
-                    aria-label={`Color variant ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+      <div className="flex flex-col md:flex-row gap-8">
+        {/* Featured product on left (full width on mobile, half width on desktop) */}
+        {featuredProduct && (
+          <div className="md:w-1/2">
+            <ProductCard product={featuredProduct} />
           </div>
-        ))}
+        )}
+
+        {/* 2x2 grid on right */}
+        <div className="md:w-1/2">
+          <div className="grid grid-cols-2 gap-4 h-full">
+            {regularProducts.map((product) => (
+              <div key={product.id} className="flex flex-col">
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <a 
