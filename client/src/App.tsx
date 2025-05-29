@@ -1,45 +1,18 @@
 import React from 'react';
-import { SaleBanner } from './components/SaleBanner';
-import { Header } from './components/Header';
-import { HeroCarousel } from './components/HeroCarousel';
-import { ProductGallery } from './components/ProductGallery';
-import CategoriesSection from './components/CategoriesSection';
-import GiftsSection from './components/GiftsSection';
-import CollaborationSection from './components/CollaborationSection';
-import FoundersThought from './components/FoundersThought';
-import TestimonialsSection from './components/TestimonialsSection';
-import CommunitySection from './components/CommunitySection';
-import Footer from './components/Footer';
-import ProductRow from './components/ProductRow';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import LoginPage from './components/LoginPage';
+import RegisterPage from './components/RegisterPage';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <SaleBanner />
-      <Header />
-      <HeroCarousel />
-      <ProductGallery />
-      <ProductRow/>
-      <CategoriesSection />
-      <GiftsSection />
-      <CollaborationSection />
-      <FoundersThought />
-      <TestimonialsSection />
-      <CommunitySection />
-      <Footer />
-      {/* Optional: Add a scroll-to-top button */}
-      
-    
-   
-      
-
-
-      {/* Footer Placeholder */}
-      {/* Main Content Placeholder */}
-      <main className="container mx-auto px-4 py-8">
-        <p className="text-center text-gray-600">Main content will go here</p>
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
+    </Router>
   );
 }
 

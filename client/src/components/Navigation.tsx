@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const navItems = [
-    "New In",
-    "Stationery",
-    "Art & Decor",
-    "Lifestyle",
-    "Gifts",
-    "Combo",
-    "Clearance Sale"
+    { name: "New In", path: "/" },
+    { name: "Stationery", path: "/" },
+    { name: "Art & Decor", path: "/" },
+    { name: "Lifestyle", path: "/" },
+    { name: "Gifts", path: "/" },
+    { name: "Combo", path: "/" },
+    { name: "Clearance Sale", path: "/" }
   ];
 
   return (
@@ -31,15 +32,22 @@ export function Navigation() {
       `}>
         <div className="pt-24 px-4">
           {navItems.map((item) => (
-            <a
-              key={item}
-              href="#"
+            <Link
+              key={item.name}
+              to={item.path}
               className="block text-gray-800 hover:text-gray-600 font-medium py-3 border-b border-gray-100"
               onClick={() => setIsOpen(false)}
             >
-              {item}
-            </a>
+              {item.name}
+            </Link>
           ))}
+          <Link
+            to="/login"
+            className="block text-gray-800 hover:text-gray-600 font-medium py-3 border-b border-gray-100"
+            onClick={() => setIsOpen(false)}
+          >
+            Login
+          </Link>
         </div>
       </nav>
 
@@ -47,13 +55,13 @@ export function Navigation() {
       <nav className="hidden md:block overflow-x-auto">
         <div className="flex items-center justify-center space-x-8 min-w-max px-4">
           {navItems.map((item) => (
-            <a
-              key={item}
-              href="#"
+            <Link
+              key={item.name}
+              to={item.path}
               className="text-gray-800 hover:text-gray-600 font-medium whitespace-nowrap py-2"
             >
-              {item}
-            </a>
+              {item.name}
+            </Link>
           ))}
         </div>
       </nav>
