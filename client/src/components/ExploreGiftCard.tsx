@@ -2,21 +2,23 @@ import React from 'react';
 
 interface ExploreGiftCardProps {
   title: string;
+  imageUrl: string;
+  link: string;
 }
 
-const ExploreGiftCard: React.FC<ExploreGiftCardProps> = ({ title }) => {
+const ExploreGiftCard: React.FC<ExploreGiftCardProps> = ({ title, imageUrl, link }) => {
   return (
-    <div className="relative border border-gray-300 aspect-[4/5] cursor-pointer group">
-      {/* Diagonal lines to create the X */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-full h-[1px] bg-gray-300 rotate-45 absolute"></div>
-        <div className="w-full h-[1px] bg-gray-300 -rotate-45 absolute"></div>
-      </div>
-      
-      {/* Title at bottom */}
-      <div className="absolute bottom-4 left-0 right-0 text-center">
-        <h3 className="text-base font-medium text-gray-700">{title}</h3>
-      </div>
+    <div className="flex flex-col">
+      <a href={link} className="group">
+        <div className="aspect-square bg-gray-100 mb-5">
+          <img 
+            src={imageUrl} 
+            alt={title} 
+            className="w-full h-full object-cover rounded-sm"
+          />
+        </div>
+        <h3 className="text-2xl font-serif mb-1">{title}</h3>
+      </a>
     </div>
   );
 }
