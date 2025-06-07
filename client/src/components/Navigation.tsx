@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const navItems = [
+  { name: 'New In', path: '/new' },
+  { name: 'Stationery', path: '/stationery' },
+  { name: 'Art & Decor', path: '/art-decor' },
+  { name: 'Lifestyle', path: '/lifestyle' },
+  { name: 'Gifts', path: '/gifts' },
+  { name: 'Combo', path: '/combo' },
+  { name: 'Clearance Sale', path: '/sale' },
+];
+
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const navItems = [
-    { name: "New In", path: "/" },
-    { name: "Stationery", path: "/" },
-    { name: "Art & Decor", path: "/" },
-    { name: "Lifestyle", path: "/" },
-    { name: "Gifts", path: "/" },
-    { name: "Combo", path: "/" },
-    { name: "Clearance Sale", path: "/" }
-  ];
 
   return (
     <>
@@ -52,18 +53,21 @@ export function Navigation() {
       </nav>
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:block overflow-x-auto">
-        <div className="flex items-center justify-center space-x-8 min-w-max px-4">
+      <nav className="border-t border-b border-gray-200 py-3 hidden md:block">
+        <ul className="flex justify-center space-x-8">
           {navItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className="text-gray-800 hover:text-gray-600 font-medium whitespace-nowrap py-2"
-            >
-              {item.name}
-            </Link>
+            <li key={item.name}>
+              <Link
+                to={item.path}
+                className="relative text-gray-800 font-medium hover:text-black transition-colors group"
+              >
+                {item.name}
+                {/* Animated underline effect */}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </nav>
 
       {/* Overlay */}

@@ -116,7 +116,7 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 mb-16">
+    <div className="container mx-auto px-10 py-8 mb-16">
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Left side - Form */}
         <div className="lg:w-3/5">

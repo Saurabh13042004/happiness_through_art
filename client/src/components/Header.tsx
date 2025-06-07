@@ -5,6 +5,9 @@ import { useCart } from '../context/CartContext';
 import { Navigation } from './Navigation';
 import Cart from './Cart';
 
+// Add font import in your index.css or directly here if needed:
+// @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
 export function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { totalItems } = useCart();
@@ -32,24 +35,28 @@ export function Header() {
             </div>
           </div>
 
-          {/* Logo */}
+          {/* Logo - Updated with cursive font */}
           <div className="order-1 md:order-2 text-center">
             <Link to="/">
-              <h1 className="text-2xl md:text-3xl font-bold">Happiness through art</h1>
+              <h1 className="text-2xl md:text-3xl font-bold" style={{ 
+                fontFamily: "'Dancing Script', cursive", 
+                fontWeight: 700 
+              }}>
+                Happiness through art
+              </h1>
             </Link>
           </div>
 
-          {/* Icons */}
+          {/* Icons - Updated to make the user icon clickable */}
           <div className="order-3 flex items-center justify-end gap-6 md:w-64">
-            <div className="relative group">
-              <Link to="/login" aria-label="Account" className="hover:opacity-75">
-                <User size={24} />
-              </Link>
-              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-sm py-2 z-50 hidden group-hover:block">
+            {/* Replace with direct Link component instead of the dropdown */}
+            <Link to="/login" aria-label="Account" className="hover:opacity-75 relative group">
+              <User size={24} />
+              {/* <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-sm py-2 z-50 hidden group-hover:block pointer-events-auto">
                 <Link to="/login" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</Link>
                 <Link to="/register" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Register</Link>
-              </div>
-            </div>
+              </div> */}
+            </Link>
             <button aria-label="Shipping" className="hover:opacity-75">
               <Truck size={24} />
             </button>
