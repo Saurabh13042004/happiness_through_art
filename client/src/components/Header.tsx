@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Search, User, Truck, ShoppingBag } from 'lucide-react';
-import { Navigation } from './Navigation';
+import { Search, User, Truck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { Navigation } from './Navigation';
 import Cart from './Cart';
 
 export function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { totalItems } = useCart();
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -13,7 +15,7 @@ export function Header() {
 
   return (
     <>
-      <header className="container mx-auto px-4 py-6">
+      <header className="container mx-auto px-4 py-6 bg-white shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8 mb-6 md:mb-8">
           {/* Search */}
           <div className="order-2 md:order-1 md:w-64 w-full">
@@ -53,10 +55,27 @@ export function Header() {
             </button>
             <button 
               aria-label="Cart" 
-              className="hover:opacity-75"
+              className="relative p-2 hover:opacity-75"
               onClick={toggleCart}
             >
-              <ShoppingBag size={24} />
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
+              </svg>
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
             </button>
           </div>
         </div>

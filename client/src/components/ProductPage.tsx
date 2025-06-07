@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { SaleBanner } from "./SaleBanner";
 import { Header } from "./Header";
@@ -6,6 +6,9 @@ import { ProductRow } from "./ProductRow";
 import PhotoBookCategories from "./PhotoBookCategories";
 import ProductFeatures from "./ProductFeatures"; // Import the new component
 import Footer from "./Footer";
+import { useCart } from '../context/CartContext';
+
+
 
 interface ProductDetails {
   id: string;
@@ -87,9 +90,16 @@ const ProductPage: React.FC = () => {
   const [selectedColor, setSelectedColor] = useState(productData.colors[0]);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState('Mini (6.25" x 6.25")');
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const { id } = useParams();
+  const { addToCart } = useCart();
 
+  // Add this useEffect to scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   // Handle expanding/collapsing sections
   const toggleSection = (section: string) => {
     if (expandedSection === section) {
@@ -97,6 +107,20 @@ const ProductPage: React.FC = () => {
     } else {
       setExpandedSection(section);
     }
+  };
+
+  // Add to cart handler
+  const handleAddToCart = () => {
+    addToCart({
+      id: productData.id,
+      name: productData.name,
+      type: productData.type,
+      price: productData.price,
+      image: productData.images[0],
+      color: selectedColor,
+      quantity: quantity,
+      size: selectedSize
+    });
   };
 
   return (
@@ -297,11 +321,15 @@ const ProductPage: React.FC = () => {
             <div className="mb-8">
               <h3 className="font-medium mb-3 text-lg">Size</h3>
               <div className="relative">
-                <select className="w-full border border-gray-300 p-3 pr-10 appearance-none focus:outline-none focus:ring-1 focus:ring-black focus:border-black bg-white">
-                  <option>Mini (6.25" x 6.25")</option>
-                  <option>Medium (8.5" x 8.5")</option>
-                  <option>Large (10" x 10")</option>
-                </select>
+  <select 
+    className="w-full border border-gray-300 p-3 pr-10 appearance-none focus:outline-none focus:ring-1 focus:ring-black focus:border-black bg-white"
+    value={selectedSize}
+    onChange={(e) => setSelectedSize(e.target.value)}
+  >
+    <option>Mini (6.25" x 6.25")</option>
+    <option>Medium (8.5" x 8.5")</option>
+    <option>Large (10" x 10")</option>
+  </select>
                 <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
                   <svg
                     className="w-4 h-4"
@@ -320,9 +348,34 @@ const ProductPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Call to Action */}
-            <button className="w-full bg-black text-white py-4 font-medium mb-8 hover:bg-gray-800 transition-colors text-lg">
-              Start Creating
+            {/* Quantity Selector */}
+            <div className="mb-8">
+              <h3 className="font-medium mb-3 text-lg">Quantity</h3>
+              <div className="flex items-center border border-gray-300">
+                <button 
+                  className="px-4 py-2 text-xl"
+                  onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                  aria-label="Decrease quantity"
+                >
+                  -
+                </button>
+                <span className="flex-1 text-center">{quantity}</span>
+                <button 
+                  className="px-4 py-2 text-xl"
+                  onClick={() => setQuantity(prev => prev + 1)}
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            {/* Call to Action - Add to Cart Button */}
+            <button 
+              className="w-full bg-black text-white py-4 font-medium mb-8 hover:bg-gray-800 transition-colors text-lg"
+              onClick={handleAddToCart}
+            >
+              Add to Cart
             </button>
 
             {/* Delivery Info */}
